@@ -44,7 +44,6 @@ class Game:
 
     def play_game(self):
         print("＋＋＋＋Let's start Black Jack!!＋＋＋＋")
-        d = 'マーク:{}  NO:{} ポイント:{}'
         self.initial_draw()
         while not self.p_is_burst:
             print('あなたの得点は:{}'.format(self.p_point))
