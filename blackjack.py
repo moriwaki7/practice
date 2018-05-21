@@ -1,17 +1,33 @@
+# -*- coding: utf-8 -*-
+u"""Black Jack
+Eady version Black Jack
+"""
+
 from random import shuffle
 
+
 class Card:
+    u"""カード
+    カード情報を定義
+    """
     marks = ['スペード', 'ハート', 'ダイヤ', 'クラブ']
-    values = [None, 'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
+    values = [None, 'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', \
+              'Jack', 'Queen', 'King']
     points = [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
     def __init__(self, card):
-        """card is taple"""
+        u"""コンストラクタ
+
+        :param card: 
+        """
         self.mark = self.marks[card[0]]
         self.value = self.values[card[1]]
         self.point = self.points[card[1]]
 
+
 class Deck:
+    u"""デッキ"""
+    
     def __init__(self):
         self.deck = []
         for i in range(4):
@@ -20,17 +36,28 @@ class Deck:
         shuffle(self.deck)
 
     def draw(self):
+        u"""デッキからカードを引く
+
+        :return: カード
+        :rtype: taple
+        """
         if len(self.deck) == 0:
             return
         return self.deck.pop()
 
+
 class Player:
+    u"""プレイヤー"""
+    
     def __init__(self):
         self.point = 0
         self.cards = []
         self.is_burst = False
 
+
 class Game:
+    u"""ゲームの定義"""
+    
     def __init__(self):
         self.game_deck = Deck()
         self.player = Player()
@@ -43,6 +70,8 @@ class Game:
         self.d_is_burst = self.dealer.is_burst
 
     def play_game(self):
+        u"""ゲームの進行"""
+        
         print("＋＋＋＋Let's start Black Jack!!＋＋＋＋")
         self.initial_draw()
         while not self.p_is_burst:
@@ -63,6 +92,8 @@ class Game:
             else:
                 print('y or n を入力してください')
     def initial_draw(self):
+        u"""最初のカード配布"""
+        
         for i in range(2):
             self.p_card = self.game_deck.draw()
             self.p_cards.append(self.p_card)
@@ -82,15 +113,20 @@ class Game:
                 print('ディーラーの２枚目はわかりません')
 
     def player_turn(self):
+        u"""プレイヤーのターンでのプレイ"""
+        
         self.p_card = self.game_deck.draw()
         self.p_cards.append(self.p_card)
         self.card = Card(self.p_card)
-        print('あなたの引いたカードは{}の{}'.format(self.card.mark, self.card.value))
+        print('あなたの引いたカードは{}の{}'\
+              .format(self.card.mark, self.card.value))
         self.p_point += self.card.point
         if self.p_point > 21:
             self.p_is_burst = True
 
     def dealer_turn(self):
+        u"""ディーラーのターンでのプレイ"""
+        
         second_card = self.d_cards[1]
         self.second_card = Card(second_card)
         print('ディーラーの２枚目のカードは{}の{}' \
@@ -100,19 +136,23 @@ class Game:
             self.d_card = self.game_deck.draw()
             self.d_cards.append(self.d_card)
             self.card = Card(self.d_card)
-            print('ディーラーの引いたカードは{}の{}'.format(self.card.mark, self.card.value))
+            print('ディーラーの引いたカードは{}の{}'\
+                  .format(self.card.mark, self.card.value))
             self.d_point += self.card.point
             print('デーラーのポイントは{}'.format(self.d_point))
             if self.d_point > 21:
                 self.d_is_burst = True
 
     def check_winner(self):
+        u"""勝者の判定"""
+        
         if self.p_point > self.d_point:
             print('おめでとう！！あなたの勝ちです！！！')
         elif self.p_point < self.d_point:
             print('残念！あなたの負けです。')
         else:
             print('引き分けです')
+
 
 game = Game()
 game.play_game()
