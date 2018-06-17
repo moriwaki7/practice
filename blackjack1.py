@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-u"""Black Jack
-Black Jack
-"""
+u"""Black Jack"""
 
 from random import shuffle
 
@@ -26,16 +24,10 @@ class Card:
 
 
 class Deck:
-    u"""デッキ
-    デッキ情報を定義
-
-    """
+    u"""デッキ情報"""
 
     def __init__(self):
-        u"""
-        デッキの作成
-
-        """
+        u"""デッキの作成"""
         self.deck = []
         for i in range(4):
             for j in range(1, 14):
@@ -105,17 +97,13 @@ class Player_base:
         return self.player_point
 
     def display_nth_card(self, n):
-        u"""n番目に引いたカードを表示
-
-        """
+        u"""n番目に引いたカードを表示"""
         card = self.hand_cards[n-1]
         print('{} の {}枚目のカードは {} の {} です'
               .format(self.name, n, card.mark, card.value))
 
     def display_point(self, display=True):
-        u"""プレイ途中のポイントを表示
-
-        """
+        u"""プレイ途中のポイントを表示"""
         if display:
             if self.has_up_point:
                 print('{}のポイントは {} もしくは {} です'
@@ -129,9 +117,7 @@ class Player_base:
 
 
 class Player(Player_base):
-    u"""プレイヤー
-
-    """
+    u"""プレイヤー"""
     def is_continue(self):
         u"""次のカードを引くか
 
@@ -147,9 +133,7 @@ class Player(Player_base):
 
 
 class dealer(Player_base):
-    u"""ディーラー
-
-    """
+    u"""ディーラー"""
     def is_continue(self):
         u"""次のカードを引くか
 
